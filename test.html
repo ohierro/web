@@ -1,0 +1,115 @@
+<html>
+<body onload="init()">
+
+<style>
+#canvas-wrap { 
+	position:relative; 
+	width:800px; 
+	height:600px 
+	background: url('./background.png');	
+}
+
+#canvas-wrap canvas { 
+	position:absolute; 
+	top:0; 
+	left:0; 
+	z-index:1; 	
+}
+
+#overlay {
+	position:absolute; 
+	margin-top: 300px;
+	left: 300px;
+	width: 300px;
+	margin-left: auto ;
+	margin-right: auto ;
+	z-index:2;
+	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+	background: -moz-linear-gradient(top, #fff, #ddd);  
+	border: 1px solid #bbb;	
+}
+</style>
+
+<script>
+var canvas;
+var ctx;
+ 
+var background;
+var width = 300;
+var height = 200;
+ 
+var cloud;
+var cloud_x;
+ 
+function init() {
+	canvas = document.getElementById("cloud_demo_canvas");
+	
+	width = window.innerWidth;
+	height = window.innerHeight;
+	
+	/*
+	width = canvas.width;
+	height = canvas.height;
+	*/
+	ctx = canvas.getContext("2d");
+ 
+	// init background 
+	background = new Image();
+	//background.src = './background.jpg';
+	background.src = './background.png';
+ 
+	// init cloud
+	cloud = new Image();
+	//cloud.src = 'http://silveiraneto.net/wp-content/uploads/2011/06/cloud.png';
+	cloud.src = './cloud1.png';
+	cloud.onload = function(){
+		cloud_x = -cloud.width;
+	};
+ 
+	return setInterval(main_loop, 10);
+}
+ 
+function update(){
+	cloud_x += 0.3;
+	if (cloud_x > width ) {
+		cloud_x = -cloud.width;
+	}
+}
+ 
+function draw() {	
+	/*
+	ctx.rect(0,0,width,height);
+	ctx.fillStyle="white";
+	ctx.fill();
+	*/
+	// Create Linear Gradients
+	var lingrad = ctx.createLinearGradient(0,0,0,height);
+	lingrad.addColorStop(0, '#00ABEB');
+	lingrad.addColorStop(0.8, '#fff');
+	//lingrad.addColorStop(0.5, '#66CC00');
+	lingrad.addColorStop(1, '#fff');
+	ctx.fillStyle = lingrad;
+	ctx.fillRect(0,0,width,height);
+    
+	ctx.drawImage(background, 0, 0, 800, 600);
+	ctx.drawImage(cloud, cloud_x, 0);
+}
+ 
+function main_loop() {
+	draw();
+	update();
+}
+
+
+</script>
+
+<div id="canvas-wrap">
+  <canvas id="cloud_demo_canvas" width="800" height="600"></canvas>
+  <div id="overlay">TEST</div>
+</div>
+
+</body>
+</html>
