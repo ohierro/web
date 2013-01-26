@@ -1,0 +1,107 @@
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+
+#canvas-wrap { 
+	position:relative; 
+	width:100%; 
+	height:100%; 	
+}
+
+#canvas-wrap canvas { 
+	position:absolute; 
+	top:0; 
+	left:0; 
+	z-index:1; 	
+}
+
+#overlay {
+	position:absolute; 
+	
+	left: 300px;
+	
+	width: 700px;
+	height: 400px;
+	
+	margin-top: 100px;	
+	z-index:2;
+	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(111, 122, 202)));
+	background: -moz-linear-gradient(top, #fff, #ddd);  
+	border: 1px solid #bbb;	
+}
+
+#overlay h2 {
+	background-color: rgba(96, 105, 119, 0.5);
+	margin-top: 0;
+	
+	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+#overlay p, pre {
+	padding-left: 10px;
+}
+
+#avatar {
+	position:absolute; 
+	margin-top: 50px;
+	left: 90px;
+	width: 200px;
+	height: 200px;
+	margin-left: auto ;
+	margin-right: auto ;
+	z-index:2;
+	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+	background: -moz-linear-gradient(top, #fff, #ddd);  
+	border: 1px solid #000;	
+}
+
+#avatar img {
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+#toolbar {
+	position: absolute;
+	z-index:2;
+	margin-top:60px;
+	left:400px;	
+	width:300px;
+	text-align: right;
+}
+
+#toolbar img {
+	margin: 5px;
+	
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+}
+
+#toolbar img:hover {
+	-webkit-transform: rotate(-7deg);
+	-moz-transform: rotate(-7deg);
+	-o-transform: rotate(-7deg);
+}
+
+#logo {
+	position: absolute;
+	z-index: 2;
+    bottom:0;
+    right:0;
+}
+
+#logo img
+{
+opacity:0.4;
+filter:alpha(opacity=40); /* For IE8 and earlier */
+}

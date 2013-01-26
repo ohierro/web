@@ -1,0 +1,123 @@
+<html>
+<body>
+
+<link href='css/jquery.jqplot.min.css' rel='stylesheet' type='text/css' /> 
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.jqplot.min.js" type="text/javascript"></script>
+
+<script class="include" language="javascript" type="text/javascript" src="js/plugins/jqplot.pieRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="js/plugins/jqplot.donutRenderer.min.js"></script>
+
+<style>
+.item {	
+	display: none;	
+}
+
+.myPie {
+	
+}
+
+.info {	
+	float: left;
+	margin-left: 450px;
+	margin-top: 50px;
+	display: none;
+	
+	width: 600px;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+   //$.jqplot.config.enablePlugins = true; 
+	var items =  ['item0', 'item1', 'item2','item3'];
+	var visible = false;
+	
+	var plot3 = $.jqplot('pie2', [[['Technical engineer',9],['J2EE Master',9],['Basic J2ME',1],['Advanced J2ME',1]]], {
+        seriesDefaults: {
+            shadow: false, 
+            renderer:$.jqplot.PieRenderer, 
+            rendererOptions:{
+                sliceMargin: 4, 
+                // rotate the starting position of the pie around to 12 o'clock.
+                startAngle: -90
+            }
+        },      
+	grid: {		
+		background: 'transparent'      // CSS color spec for background color of grid.
+	},	
+	legend:{
+            show:true, 
+            placement: 'outside', 
+            rendererOptions: {
+                numberRows: 2
+            }, 
+            location:'s',
+            marginTop: '15px'
+        }	
+    });
+    
+	$('#pie2').bind('jqplotDataHighlight', 
+	function (ev, seriesIndex, pointIndex, data, radius) {		
+		//$("#" + items[pointIndex]).slideToggle();
+		if (!visible) {
+			$("#info").toggle( "drop" );		
+			$("#" + items[pointIndex]).show();
+			visible = true;
+		}
+	});
+	
+	$('#pie2').bind('jqplotDataUnhighlight', 
+	function (ev, seriesIndex, pointIndex, data) {
+		//$("#" + items[pointIndex]).slideToggle();	
+		//$("#info").slideToggle();
+		if (visible) {
+			$("#info").toggle( "drop");
+			
+			for (element in items) {
+				$("#" + items[element]).hide();
+			}	
+					
+			visible = false;			
+		}
+	});
+});
+</script>
+
+
+<div id="graph">
+	<div id="pie2" style="margin-top:20px;margin-left:20px;width:400px;height:400px;" />	
+	<div id="info" class="info">
+		<div class="item" id="item0">
+		<h2>Technical engineer</h2>
+			Technical engineer in computer systems in EUPLA.
+			<div style="duration">From 1999-2004</div>
+			<div style="contents"></div>
+		</div>
+
+		<div class="item" id="item1">
+		<h2>J2EE Enterprise Applications development (Sun)</h2>
+			Master in J2EE Entreprise Applications development, with same contents as 
+			Sun official certification.
+			<div style="duration">Jan 2007 - Oct 2007</div>
+			<div style="contents"></div>
+		</div>
+
+		<div class="item" id="item2">
+			<h2>Mobile application development with J2ME</h2>
+			Basic level of mobile application development with J2ME
+			<div style="duration">40h (2007)</div>
+			<div style="contents"></div>
+		</div>
+
+		<div class="item" id="item3">
+			<h2>Advance J2ME</h2>
+			Advanced level of mobile application development with J2ME
+			<div style="duration">40h (2007)</div>
+			<div style="contents"></div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
